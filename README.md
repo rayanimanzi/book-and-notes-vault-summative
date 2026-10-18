@@ -1,5 +1,7 @@
 # Book & Notes Vault
+![Book & Notes Vault dashboard](assets/screenshot.png)
 
+My summative project for Building Responsive UI. ...
 An accessible, responsive book catalog built with vanilla HTML, CSS and JavaScript (ES modules). No frameworks, no build step.
 
 - **Live site:** https://rayanimanzi.github.io/book-and-notes-vault-summative/
