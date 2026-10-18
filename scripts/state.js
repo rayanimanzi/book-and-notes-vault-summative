@@ -11,3 +11,4 @@ const rec = { id: nextId(), ...clean(f), createdAt: now(), updatedAt: now() };
 export const updateRecord = (id, f) => Object.assign(find(id), clean({ ...find(id), ...f }), { updatedAt: now() });
 export const deleteRecord = (id) => { records = records.filter((r) => r.id !== id); };
 export const setRecords = (list) => { records = list; };
+export const settings = { speed: 30, unit: 'hours', cap: 3500};

@@ -1,7 +1,7 @@
 const NAME = String.raw`\p{L}[\p{L}.'’-]*(?: \p{L}[\p{L}.'’-]*)*`;
 export const RE ={
     trim: /^\S(?:[\s\S]*\S)?$/,
-    double: /[^\s]{2,}/,
+    double: /\s{2,}/,
     dupWord: /\b(\w+)\s+\1\b/,
     author: new RegExp(`^${NAME}(?:(?:, | & )${NAME})*$`, 'u'),
     dupAuthor: /(?:^|, | & )([^,&]+)(?:, | & )(?:[^,&]+(?:, | & ))*\1(?=$|, | & )/,
@@ -20,7 +20,7 @@ const RULES ={
     author: [[RE.trim, 1, 'remove space at the start or end.'], [RE.author, 1, 'Letters only, separate authors with","or "&".'], [RE.dupAuthor, 0, 'An authoris listed twice.']],
     pages: [[RE.number, 1, 'Use a number like 320,'], [RE.whole, 1, 'Pages must be a whole number above o.']],
     dateAdded: [[RE.date, 1, 'Use the foemat YYYYY-MM-DD.']],
-    tag: [[RE.date, 1, 'Letters only, with single spaces or hyphens.']],
+    tag: [[RE.tag, 1, 'Letters only, with single spaces or hyphens.']],
     isbn: [[RE.isbn, 1, 'Use a 10- or 13-digit ISBN.']],
     notes: [[RE.trim, 1, 'Remove spaces at the start or end.']],
 };
@@ -31,7 +31,7 @@ const isRealDate = (s) => { const d = new Date(s + 'T00:00:00Z'); return !isNaN(
 function isbnOK(raw) {
     const s = raw.replace(/-/g, ''), long = s.length === 13;
     const sum = [...s].reduce((a,c,i) => a + (c === 'X' ? 10 : +c) * (long ? 1 + 2 * (i % 2) : 10 - i), 0);
-    return sum % 10 === 0;
+    return sum % (long ? 10 : 11) === 0;
 
 }
 

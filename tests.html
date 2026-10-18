@@ -13,6 +13,8 @@
         <script type="module">
             import { compileRegex, highlight, extractIsbn, sortRecords } from './scripts/search.js';
             import { validateField, validateRecord } from './scripts/validators.js';
+            import { convert, formatTime } from './scripts/units.js';
+            import { computeStats, capStatus } from './scripts/stats.js';
             let pass = 0, fail = 0;
             function ok(name, cond) {
                 const li = document.createElement('li');
@@ -37,6 +39,11 @@
             ok('extracts ISBN from pasted text', extractIsbn('Back cover: ISBN 978-0-306-40615-7 (paperback)') === '978-0-306-40615-7');  
             ok('ignores phone numbers', extractIsbn('Call 0788123456') === undefined);
             ok('sorts by pages descending', sortRecords([{ pages: 5 }, { pages: 50 }], 'pages', 'desc')[0].pages === 50); 
+            ok(' 300 pages at 60 pages/hour = 5 hours', convert (300, 'pages', 'hours', 60) === 5);
+            ok('formats 400 min as "6 h 40 min"', formatTime(400) === '6h 40 min' && formatTime (400, 'minutes') === '400 min');
+            ok('budget: over, under, none', capStatus(120,100) === 'over' && capStatus(80,100) === 'under' && capStatus(80, 0) === 'none');
+             const st = computeStats([{ tag: 'Tech', pages: 10, author: 'A', dateAdded: '2026-10-18' }, { tag: 'Tech', pages: 5, author: 'B', dateAdded: '2026-10-01' }, { tag: 'Fiction', pages: 1, author: 'A', dateAdded: '2025-01-01' }], new Date(2026, 9, 18));
+             ok('stats: total, top tag, this month,last 7 days', st.pages === 16 && st.topTag === 'Tech' && st.monthPages === 15 && st.last7[6].pages === 10);
     const s = document.getElementById('summary');
     s.textContent = `${pass} passed, ${fail} failed`;
     s.className =fail ? 'fail' : 'pass';
