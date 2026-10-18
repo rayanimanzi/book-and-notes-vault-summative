@@ -4,35 +4,39 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Test - Book &amp; Notes Vault</title>    
-        <style>body { font-family: Arial, sans-serif;max width: 900px; margin: auto; padding: 1.5rem; } .pass {color: #b3261e; front-weight: 700; }</style>
+        <style>body { font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 1.5rem; } .pass { color: #145c2a; } .fail { color: #b3261e; font-weight: 700; }</style>
     </head>
     <body>
         <h1> Unit tests</h1>
         <p id="summary" role="status">Running...</p>
         <ol id="results"></ol>
-        <script type="'module">
+        <script type="module">
+            import { compileRegex, highlight, extractIsbn, sortRecords } from './scripts/search.js';
             import { validateField, validateRecord } from './scripts/validators.js';
             let pass = 0, fail = 0;
             function ok(name, cond) {
                 const li = document.createElement('li');
                 li.className = cond ? 'pass' : 'fail';
-                li.textContent = (cond ? 'PASS' : 'FAIL') + name;
+                               li.textContent = (cond ? 'PASS ' : 'FAIL ') + name;
                 document.getElementById('results').append(li);
                 cond ? pass++ : fail++;
 
             }
             function check(field, good, bad) {
-                good.forEach((v) => ok`${field} accepts "${v}"`, validateField(field, v) === '');
-      bad.forEach((v) => ok(`${field} rejects "${v}"`, validateField(field, v) !== ''));
+                good.forEach((v) => ok(`${field} accepts "${v}"`, validateField(field, v) === ''));
+                bad.forEach((v) => ok(`${field} rejects "${v}"`, validateField(field, v) !== ''));
             }
-            check('title', ['Things Fall Apart' , 'A', 'The problem'], ['Dune', 'Dune', 'Clean Code', '', 'Into the Wild']);
-            check('author', ['J. R. R. Tolkien', "Ngũgĩ wa Thiong'o", 'Will Durant & Ariel Durant'], ['Jane1', 'Jane Doe,Bob', 'Jane Doe & Jane Doe', 'Jane Doe, Bob Ray & Jane Doe']);
+            check('title', ['Things Fall Apart', 'A', 'The the Problem'], [' Dune', 'Dune ', 'Clean  Code', '', 'Into the the Wild']);            check('author', ['J. R. R. Tolkien', "Ngũgĩ wa Thiong'o", 'Will Durant & Ariel Durant'], ['Jane1', 'Jane Doe,Bob', 'Jane Doe & Jane Doe', 'Jane Doe, Bob Ray & Jane Doe']);
             check('pages', ['1', '4215', '20000'], ['0', '012', '12.5', '-5', '1,000', '20001']);
             check('dateAdded', ['2024-02-29', '2025-12-31', '2026-01-01'], ['2025-13-01', '2025-1-5', '2025-02-30', '2025-02-29']);
             check('tag', ['Fiction', 'Non-fiction', 'Science Fiction'], ['Sci-Fi2', ' Fiction', 'Non--fiction']);
             check('isbn', ['978-0-306-40615-7', '9780306406157', '080442957X', ''], ['978030640615', '1234567890123', 'X804429575', '978-0-306-40615-8']);
-            check('notes', ['', 'Line one\nline two'], ['Hi\n', 'x']);
-            ok('valid record passes', validateRecord({ title: 'Dune', author: 'Frank Herbert', pages: '412', dateAdded: '2025-09-20', tag: 'Fiction' }).valid);
+            check('notes', ['', 'Line one\nline two'], ['Hi\n', ' x']);            ok('valid record passes', validateRecord({ title: 'Dune', author: 'Frank Herbert', pages: '412', dateAdded: '2025-09-20', tag: 'Fiction' }).valid);
+            ok('bad regex returns an error, no crash', compileRegex('(').error === 'Unterminated group');
+            ok('highlight escapes HTML and marks matches', highlight('<b>Dune</b>', /dune/i) === '&#60;b&#62;<mark>Dune</mark>&#60;/b&#62;');
+            ok('extracts ISBN from pasted text', extractIsbn('Back cover: ISBN 978-0-306-40615-7 (paperback)') === '978-0-306-40615-7');  
+            ok('ignores phone numbers', extractIsbn('Call 0788123456') === undefined);
+            ok('sorts by pages descending', sortRecords([{ pages: 5 }, { pages: 50 }], 'pages', 'desc')[0].pages === 50); 
     const s = document.getElementById('summary');
     s.textContent = `${pass} passed, ${fail} failed`;
     s.className =fail ? 'fail' : 'pass';

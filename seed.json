@@ -1,0 +1,17 @@
+[
+ {"id": "book_0001", "title": "Things Fall Apart", "author": "Chinua Achebe", "pages": 209, "tag": "Fiction", "dateAdded": "2026-10-13", "isbn": "978-0-385-47454-2", "notes": "Re-read for book club on Thursday at 18:00.", "createdAt": "2026-10-13T09:01:00.000Z", "updatedAt": "2026-10-13T09:01:00.000Z"},
+ {"id": "book_0002", "title": "Decolonising the Mind", "author": "Ngũgĩ wa Thiong'o", "pages": 114, "tag": "Non-fiction", "dateAdded": "2026-10-12", "isbn": "0852555016", "notes": "", "createdAt": "2026-10-12T09:02:00.000Z", "updatedAt": "2026-10-12T09:02:00.000Z"},
+ {"id": "book_0003", "title": "Eloquent JavaScript", "author": "Marijn Haverbeke", "pages": 472, "tag": "Tech", "dateAdded": "2026-10-10", "isbn": "978-1-593-27950-9", "notes": "Practise the regex chapter before the summative.", "createdAt": "2026-10-10T09:04:00.000Z", "updatedAt": "2026-10-10T09:04:00.000Z"},
+ {"id": "book_0004", "title": "The Story of Civilization", "author": "Will Durant & Ariel Durant", "pages": 1049, "tag": "History", "dateAdded": "2026-09-15", "isbn": "", "notes": "Volume 1 only. Borrowed from the library.", "createdAt": "2026-09-15T09:05:00.000Z", "updatedAt": "2026-09-15T09:05:00.000Z"},
+ {"id": "book_0005", "title": "Half of a Yellow Sun", "author": "Chimamanda Ngozi Adichie", "pages": 433, "tag": "Fiction", "dateAdded": "2026-10-08", "isbn": "9780007200283", "notes": "", "createdAt": "2026-10-08T09:06:00.000Z", "updatedAt": "2026-10-08T09:06:00.000Z"},
+ {"id": "book_0006", "title": "Long Walk to Freedom", "author": "Nelson Mandela", "pages": 656, "tag": "Biography", "dateAdded": "2026-10-07", "isbn": "", "notes": "Found the ISBN later: see receipt \"ISBN 978-0-316-54818-2\" in my notes.", "createdAt": "2026-10-07T09:07:00.000Z", "updatedAt": "2026-10-07T09:07:00.000Z"},
+ {"id": "book_0007", "title": "Pocket Regex Cheat Sheet", "author": "Anonymous", "pages": 1, "tag": "Tech", "dateAdded": "2026-10-09", "isbn": "", "notes": "Tiny edge case: a one-page book.", "createdAt": "2026-10-09T09:08:00.000Z", "updatedAt": "2026-10-09T09:08:00.000Z"},
+ {"id": "book_0008", "title": "In Search of Lost Time", "author": "Marcel Proust", "pages": 4215, "tag": "Fiction", "dateAdded": "2024-02-29", "isbn": "", "notes": "Leap-day purchase. All seven volumes.", "createdAt": "2024-02-29T09:09:00.000Z", "updatedAt": "2024-02-29T09:09:00.000Z"},
+ {"id": "book_0009", "title": "Sapiens", "author": "Yuval Noah Harari", "pages": 443, "tag": "History", "dateAdded": "2025-12-31", "isbn": "9780062316097", "notes": "", "createdAt": "2025-12-31T09:10:00.000Z", "updatedAt": "2025-12-31T09:10:00.000Z"},
+ {"id": "book_0010", "title": "<script>alert('x')</script> & Other Tricks", "author": "Test Author", "pages": 42, "tag": "Tech", "dateAdded": "2026-01-01", "isbn": "", "notes": "HTML-looking title: must display as text, never run.", "createdAt": "2026-01-01T09:11:00.000Z", "updatedAt": "2026-01-01T09:11:00.000Z"}
+]
+
+
+
+
+ 
