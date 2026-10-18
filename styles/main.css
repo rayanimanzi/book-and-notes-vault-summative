@@ -143,3 +143,5 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }
   .records-table td.actions { width: auto; white-space: nowrap; }
 .records-table td.actions .btn { display: inline-flex; width: auto; margin: 0 0 0 .35rem; }
 }
+@media (prefers-color-scheme: dark) { :root { --bg: #of131a; --surface: #181d27; --text: #e9edf5;  --muted:  #a9b2c3; --border: #2d3544; --primary: #d5a6ee; --primary-ink: #0b1220; --primary-soft: #33213f; --danger: #ff8a80; --danger-soft: #3a1c1b; --success: #6fd38e; --warn: #f5b84d; --mark: #ffd43b; --shadow: none; color-scheme: dark;}}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition:none !important; } }

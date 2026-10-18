@@ -179,3 +179,12 @@ Object.assign(store.settings, load('vault:settings'));
 showPage();
 convertUnits();
 load('vault:books') ? (store.setRecords(load('vault:books')), render()) : loadSeed();
+
+document.addEventListener('keydown', (e) => {
+  if (e.target.closest('input, textarea, select') || e.ctrlKey || e.metaKey) return;
+  const go = { '/': ['records', '#search-input'], n: ['add', '#f-title'] }[e.key];
+if (!go) return;
+  e.preventDefault();
+  location.hash = go[0];
+  setTimeout(() => $(go[1]).focus(), 50);
+});
