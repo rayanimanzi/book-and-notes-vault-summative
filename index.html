@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="book & Notes Vault - an accessible, offline-first catalog for books and notes.">
+    <title>Book & Notes Vault</title>
+    <link rel=""icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/main.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+    <div class="container header-inner">
+        <p class-"brand">
+            <img src=""assets/favion.svg" alt="" width="28" height="28" >
+            <span> book &amp; Notes Vault</span>
+        </p>
+        <button type="button" class="nav-toogle" aria-expanded="false" aria-controls="primary-nav">
+        Menu
+        </button>
+        <nav id="primary-nav" class="primary-nav" aria-label="Primary Navigation">
+            <ul class="nav-list">
+                <li><a href="#dashboard"data-route="dashboard">Dashboard</a></li>
+                <li><a href="#records" data-route="records">Library</a></li>
+                <li><a href="#add" data-route="add"> Add book</a></li>
+                <li><a href="#settings" data-route="settings">Settings</a></li>
+                <li><a href="#about" data-route="about">About</a></li>
+            </ul>
+            </nav>
+            </div>
+        </header>
+
+        <main id="main" class="container" tabindex="-1">
+            <section id="dashboard" class="page" aria-labelledby="dashboard-heading">
+                <h1 id="dashboard-title" tabindex="-1">Dashboard</h1>
+            < ul class="stat-grid" aria-label="Key figures">
+            <li class="stat-card">
+                <span class="stat-label">Books</span>
+                <span class="stat-value" id="book-count">0</span>
+                <span class="stat-sub" id="stat-authors"></span>
+            </li>
+            <li class="stat-card">
+                <span class="stat-label">total pages</span>
+                <span class="stat-value" id="stat-pages">0</span>
+                <span class="stat-sub" id="stat-time"></span>
+            </li>
+            <li class="stat-card">
+                <span class="stat-label">top tag</span>
+                <span class="stat-value" id="stat-top">0</span>
+                <span class="stat-sub" id="stat-top-sub"></span>
+            </li>
+            <li class="stat-card">
+                <span class="stat-label">Pages added this month</span>
+                <span class="stat-value" id="stat-month">0</span>
+                <span class="stat-sub" id="stat-month-time"></span>
+            </li>
+        </ul> 
+        
+        <div class="dash-grid">
+            <section class="card" aria-labelledby="recently-added-heading">
+                <h2 id="cap-title">Monthly reading budget</h2>
+                <p class="hint">Pages you allow yourself to add to the vault each month, so your to-read pile stays readable.</p>
+                <div class="meter" aria-hidden="true"><div class="meter-fill" id="cap-fill"></div></div>
+                <p id="cap-message" class="cap-message" aria-live="polite" aria-atomic="true">No budget set.</p> 
+                <p class="hint"> Change it in <a href="#settings">Settings</a>.</p>
+                </section>
+                <section class="card" aria-labelledby="trend-title">
+          <h2 id="trend-title">Last 7 days</h2>
+          <ol class="chart" id="trend-chart" aria-describedby="trend-desc"></ol>
+          <p id="trend-desc" class="hint">Pages added per day, oldest to newest.</p>
+        </section>
+      </div>
+    </section>
+
+    <section id="records" class="page" aria-labelledby="records-title" hidden>
+        <h1 id="records-heading" tabindex="-1">Library</h1>
+        <form id="search-form" class="search-bar" role="search"
+    <div class="field grow"><label for="search-input">Regex search</label><input id="search-input" type="search" aria-describedby="search-error"><p id="search-error" class="field-error" aria-live="polite"></p></div>
+        <div class="field check"><input id="search-case" type="checkbox" checked><label for="search-case">Case-insensitive</label></div>
+        <div class="field"><label for="sort-select">Sort by</label><select id="sort-select"><option value="dateAdded:desc">Newest</option><option value="dateAdded:asc">Oldest</option><option value="title:asc">Title A-Z</option><option value="title:desc">Title Z-A</option><option value="author:asc">Author A-Z</option><option value="author:desc">Author Z-A</option><option value="pages:desc">Most pages</option><option value="pages:asc">Fewest pages</option></select></div>
+    </form>
+    <p id="results-status" class="results-status" role="status"></p>
+    <div class="table-wrap">
+        <table class="records-table">
+             <thead><tr><th data-col="dateAdded"><button class="sort-btn" data-sort="dateAdded">Added</button></th><th data-col="title"><button class="sort-btn" data-sort="title">Title</button></th><th data-col="author"><button class="sort-btn" data-sort="author">Author</button></th><th data-col="pages"><button class="sort-btn" data-sort="pages">Pages</button></th><th>Tag</th><th><span class="sr-only">Actions</span></th></tr></thead>
+          <tbody id="records-body"></tbody>
+        </table>
+    </div>
+    <p id ="empty-state" class="empty-state" hidden> your vault is empty. <a href="#add"> Add a book</a>.</p>
+    </section>
+
+    <section id="add" class="page" aria-labelledby="add-title" hidden>
+      <h1 id="add-title" tabindex="-1">Add a book</h1>
+      <form id="record-form" class="card form">
+        <div class="field"><label for="f-title">Title *</label><input id="f-title" name="title" aria-describedby="f-title-error"><p id="f-title-error" class="field-error"></p></div>
+        <div class="field"><label for="f-author">Author(s) *</label><input id="f-author" name="author" aria-describedby="f-author-error"><p id="f-author-error" class="field-error"></p></div>
+        <div class="field"><label for="f-pages">Pages *</label><input id="f-pages" name="pages" aria-describedby="f-pages-error"><p id="f-pages-error" class="field-error"></p></div>
+        <div class="field"><label for="f-dateAdded">Date added * (YYYY-MM-DD)</label><input id="f-dateAdded" name="dateAdded" aria-describedby="f-dateAdded-error"><p id="f-dateAdded-error" class="field-error"></p></div>
+        <div class="field"><label for="f-tag">Tag *</label><input id="f-tag" name="tag" list="tag-list" aria-describedby="f-tag-error"><datalist id="tag-list"></datalist><p id="f-tag-error" class="field-error"></p></div>
+        <div class="field"><label for="f-isbn">ISBN</label><input id="f-isbn" name="isbn" aria-describedby="f-isbn-error"><p id="f-isbn-error" class="field-error"></p></div>
+        <div class="field"><label for="f-notes">Notes</label><textarea id="f-notes" name="notes" aria-describedby="f-notes-error"></textarea><p id="f-notes-error" class="field-error"></p></div>
+        <div class="form-actions"><button class="btn btn-primary">Save book</button><button type="reset" class="btn">Clear</button></div>
+        <p id="form-status" class="form-status" role="status"></p>
+      </form>
+      </section>
+    <section id="settings" class="page" aria-labelledby="settings-title"
+<h1 id="settings-title" tabindex="-1">Settings</h1>
+<div class="settings-grid">
+    <form id="units-form" class="card form"><h2>Units</h2>
+    <div class="field"><label for="s-speed">Pages per hour</label><input id="s-speed" aria-describedby="s-speed-error"><p id="s-speed-error" class="field-error"></p></div>
+          <div class="field"><label for="s-unit">Show time in</label><select id="s-unit"><option value="hours">Hours</option><option value="minutes">Minutes</option></select></div>
+          <button class="btn btn-primary">Save units</button>
+    </form>
+    <form id="converter-form" class="card form"><h2>Converter</h2>
+        <div class="field"><label for="c-amount">Value</label><input id="c-amount" value="300"></div>
+          <div class="field"><label for="c-from">From</label><select id="c-from"><option>pages</option><option>minutes</option><option>hours</option></select></div>
+          <div class="field"><label for="c-to">To</label><select id="c-to"><option>pages</option><option>minutes</option><option selected>hours</option></select></div>
+          <output id="c-result" class="converter-result" aria-live="polite"></output>
+          </form>
+
+        <form id="cap-form" class="card form"><h2>Monthly budget</h2> 
+            <div class="field"><label for="s-cap">Pages per month (0 = none)</label><input id="s-cap" aria-describedby="s-cap-error"><p id="s-cap-error" class="field-error"></p></div>
+          <button class="btn btn-primary">Save budget</button>
+        </form>
+        <form id="tag-form" class="card form"><h2>Tags</h2>
+           <ul id="tag-manager" class="chip-list" aria-label="Current tags"></ul>
+          <div class="field"><label for="s-new-tag">New tag</label><input id="s-new-tag" aria-describedby="s-new-tag-error"><p id="s-new-tag-error" class="field-error"></p></div>
+          <button class="btn">Add tag</button>  
+        </form> 
+        <section class="card"><h2>Data</h2>
+           <div class="btn-row"><button id="export-btn" class="btn">Export JSON</button><label class="btn file-btn" for="import-file">Import JSON</label><input id="import-file" type="file" accept=".json" class="visually-hidden-file"><button id="seed-btn" class="btn">Load sample data</button><button id="clear-btn" class="btn btn-danger">Delete all</button></div>
+          <p id="data-status" class="form-status" role="status"></p>
+        </section>
+      </div>
+    </section>
+
+    <section id="about" class="page" aria-labelledby="about-title" hidden>
+        <h1 id="about-title" tabindex="-1">About</h1>
+        <div class="card prose">
+     <p>A catalog for the books you own or want to read, with regex search and a monthly page budget. Everything stays in your browser.</p>
+        <h2>Contact</h2>
+        <ul><li>GitHub: <a href="https://github.com/rayanimanzi">rayanimanzi</a></li><li>Email: <a href="mailto:r.mugangaim@alustudent.com">r.mugangaim@alustudent.com</a></li></ul>
+      </div>
+    </section>
+        </main>
+        <footer class="site-footer"><div class="container"><p>Book &amp; Notes Vault</p></div></footer>
+        <div id="live-polite" class="sr-only" role="status"></div>
+        <div id="live-assertive" class="sr-only" role="alert"></div>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+    <form method="dialog"><h2 id="confirm-title">Are you sure?</h2><p id="confirm-text"></p><div class="btn-row"><button value="cancel" class="btn" autofocus>Cancel</button><button value="confirm" class="btn btn-danger">Delete</button></div></form>
+  </dialog>
+  </body>
+</html>
+        
