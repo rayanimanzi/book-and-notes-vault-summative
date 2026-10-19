@@ -68,5 +68,7 @@ ES modules need a server: open the folder in VS Code and use **Live Server** (or
 
 ## Author
 
+https://www.loom.com/share/4873f4e391f9469799835005a6d07bfc
+
 - GitHub: [@rayanimanzi](https://github.com/rayanimanzi)
 - Email: r.mugangaim@alustudent.com
